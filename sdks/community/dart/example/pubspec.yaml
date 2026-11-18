@@ -1,0 +1,27 @@
+name: ag_ui_example
+description: Flutter dojo for the local AG-UI Dart SDK and Go example server.
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: '>=3.9.0 <4.0.0'
+  flutter: '>=3.35.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.1.5
+  ag_ui:
+    path: ../
+  http: ^1.2.0
+  file_picker: ^8.1.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

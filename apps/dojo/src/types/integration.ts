@@ -1,0 +1,65 @@
+import type { menuIntegrations } from "../menu";
+
+export type Feature =
+  | "ag_ui_docs_copilot"
+  | "agentic_chat"
+  | "agentic_generative_ui"
+  | "human_in_the_loop"
+  | "human_in_the_loop_approval"
+  | "interrupt"
+  | "predictive_state_updates"
+  | "shared_state"
+  | "tool_based_generative_ui"
+  | "backend_tool_rendering"
+  | "agentic_chat_reasoning"
+  | "agentic_chat_citations"
+  | "agentic_chat_multimodal"
+  | "subgraphs"
+  | "deepagents_subagents"
+  | "multi_agent"
+  | "a2a_chat"
+  | "vnext_chat"
+  | "v1_agentic_chat"
+  | "a2ui_fixed_schema"
+  | "a2ui_dynamic_schema"
+  | "a2ui_advanced"
+  | "a2ui_recovery"
+  | "crew_chat"
+  | "subagents"
+  | "custom_lifecycle_events"
+  | "dynamic_system_prompt"
+  | "error_flow"
+  | "background_agents"
+  | "observational_memory"
+  | "tool_approval"
+  | "generative_ui_markdown"
+  | "generative_ui_tool";
+
+export interface MenuIntegrationConfig {
+  id: string;
+  name: string;
+  features: Feature[];
+  /**
+   * No hosted backend serves this integration, so production builds (the
+   * hosted Dojo) leave it out of the integration picker. Its routes still
+   * work, for local runs and the e2e lanes.
+   */
+  localOnly?: boolean;
+}
+
+/**
+ * Helper type to extract features for a specific integration from menu config
+ */
+type IntegrationFeature<
+  T extends readonly MenuIntegrationConfig[],
+  Id extends string,
+> = Extract<T[number], { id: Id }>["features"][number];
+
+/** Type representing all valid integration IDs */
+export type IntegrationId = (typeof menuIntegrations)[number]["id"];
+
+/** Type to get features for a specific integration ID */
+export type FeatureFor<Id extends IntegrationId> = IntegrationFeature<
+  typeof menuIntegrations,
+  Id
+>;
